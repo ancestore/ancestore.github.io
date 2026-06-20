@@ -20,6 +20,27 @@ interface FontOptions {
 }
 export const prerender = true;
 
+function getDataUriMimeType(filePath: string) {
+	const ext = filePath.split(".").pop()?.toLowerCase();
+	switch (ext) {
+		case "avif":
+			return "image/avif";
+		case "webp":
+			return "image/webp";
+		case "jpg":
+		case "jpeg":
+			return "image/jpeg";
+		case "png":
+			return "image/png";
+		case "gif":
+			return "image/gif";
+		case "svg":
+			return "image/svg+xml";
+		default:
+			return "image/png";
+	}
+}
+
 export const getStaticPaths: GetStaticPaths = async () => {
 	if (!siteConfig.post.generateOgImages) {
 		return [];
@@ -115,7 +136,8 @@ export async function GET({
 			? `./public${profileConfig.avatar}`
 			: `./src/${profileConfig.avatar}`;
 		const avatarBuffer = fs.readFileSync(avatarPath);
-		avatarBase64 = `data:image/png;base64,${avatarBuffer.toString("base64")}`;
+		const avatarMimeType = getDataUriMimeType(avatarPath);
+		avatarBase64 = `data:${avatarMimeType};base64,${avatarBuffer.toString("base64")}`;
 	}
 
 	let iconPath = "./public/favicon/favicon-dark-192.png";
