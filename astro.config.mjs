@@ -54,6 +54,9 @@ const adapter = process.env.CF_WORKERS
 export default defineConfig({
 	site: siteConfig.site_url,
 	trailingSlash: "always",
+	devToolbar: {
+		enabled: false,
+	},
 
 	adapter,
 

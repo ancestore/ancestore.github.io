@@ -29,13 +29,13 @@ const getInitialKeyword = (): string => {
 const fakeResult: SearchResult[] = [
 	{
 		url: formatUrl("/"),
-		meta: { title: "Dev Mode Search Result 1" },
-		excerpt: "This is a <mark>mock</mark> result for development.",
+		meta: { title: "开发模式搜索结果 1" },
+		excerpt: "这是开发环境中的 <mark>模拟</mark> 搜索结果。",
 	},
 	{
 		url: formatUrl("/"),
-		meta: { title: "Dev Mode Search Result 2" },
-		excerpt: "Pagefind only works in <mark>production</mark> build.",
+		meta: { title: "开发模式搜索结果 2" },
+		excerpt: "Pagefind 只会在 <mark>生产构建</mark> 后提供真实搜索。",
 	},
 ];
 

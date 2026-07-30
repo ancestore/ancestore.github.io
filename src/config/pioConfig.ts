@@ -13,7 +13,7 @@ export const spineModelConfig: SpineModelConfig = {
 		scale: 1.0,
 		// X轴偏移
 		x: 0,
-		// Y轴偏移
+		// Y轴偏移/
 		y: 0,
 	},
 

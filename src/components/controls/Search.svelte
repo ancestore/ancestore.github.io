@@ -19,14 +19,14 @@ let debounceTimer: NodeJS.Timeout;
 const fakeResult: SearchResult[] = [
 	{
 		url: formatUrl("/"),
-		meta: { title: "This Is a Fake Search Result" },
+		meta: { title: "这是一个测试搜索结果" },
 		excerpt:
-			"Because Pagefind cannot work in the <mark>dev</mark> environment.",
+			"因为 Pagefind 不能在 <mark>dev</mark> 开发环境中工作。",
 	},
 	{
 		url: formatUrl("/"),
-		meta: { title: "If You Want to Test the Search" },
-		excerpt: "Try running <mark>npm build && npm preview</mark> instead.",
+		meta: { title: "用于测试搜索功能" },
+		excerpt: "如需测试真实搜索，请先运行 <mark>pnpm build</mark>，再运行 <mark>pnpm preview</mark>。",
 	},
 ];
 
@@ -151,7 +151,7 @@ $: if (initialized && (keywordMobile || keywordMobile === "")) {
 </div>
 
 <!-- toggle btn for phone/tablet view -->
-<button on:click={togglePanel} aria-label="Search Panel" id="search-switch"
+<button on:click={togglePanel} aria-label="搜索面板" id="search-switch"
         class="btn-plain scale-animation lg:hidden! rounded-lg w-11 h-11 active:scale-90">
     <Icon icon="material-symbols:search" class="text-[1.25rem]"></Icon>
 </button>
@@ -240,4 +240,3 @@ top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
         overflow-y: auto;
     }
 </style>
-
