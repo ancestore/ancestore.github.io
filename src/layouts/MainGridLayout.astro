@@ -454,7 +454,7 @@ const bannerCarouselInterval = Math.max(
             var container = document.getElementById('banner-images-container');
             if (!container) return;
 
-            var WALLPAPER_BANNER = 'banner';
+            var CAROUSEL_WALLPAPER_MODES = ['banner', 'fullscreen'];
 
             var mobileCount = parseInt(container.dataset.mobileCount || '0', 10);
             var desktopCount = parseInt(container.dataset.desktopCount || '0', 10);
@@ -472,8 +472,9 @@ const bannerCarouselInterval = Math.max(
                 return stored === 'true';
             }
 
-            function isBannerWallpaperMode() {
-                return document.documentElement.getAttribute('data-wallpaper-mode') === WALLPAPER_BANNER;
+            function isCarouselWallpaperMode() {
+                var mode = document.documentElement.getAttribute('data-wallpaper-mode');
+                return CAROUSEL_WALLPAPER_MODES.indexOf(mode) !== -1;
             }
 
             // 收集所有帧内容
@@ -619,7 +620,7 @@ const bannerCarouselInterval = Math.max(
 
             function startCarousel() {
                 stopCarousel();
-                if (!isBannerWallpaperMode()) return;
+                if (!isCarouselWallpaperMode()) return;
                 if (!isCarouselEnabled()) return;
 
                 // 首张图立即启动 Ken Burns 缩放
@@ -627,7 +628,7 @@ const bannerCarouselInterval = Math.max(
                 applyInitialKB('banner-image-slot-desktop');
 
                 timerId = setInterval(function() {
-                    if (!isBannerWallpaperMode()) { stopCarousel(); return; }
+                    if (!isCarouselWallpaperMode()) { stopCarousel(); return; }
                     if (!isCarouselEnabled()) { stopCarousel(); return; }
                     crossfade('banner-image-slot-mobile', mobileCount, 'mobile');
                     crossfade('banner-image-slot-desktop', desktopCount, 'desktop');
@@ -643,7 +644,7 @@ const bannerCarouselInterval = Math.max(
             });
 
             window.addEventListener('wallpaperModeChange', function(e) {
-                if (e.detail && e.detail.mode === 'banner') {
+                if (e.detail && CAROUSEL_WALLPAPER_MODES.indexOf(e.detail.mode) !== -1) {
                     if (isCarouselEnabled()) startCarousel();
                 } else {
                     stopCarousel();
@@ -969,4 +970,3 @@ const bannerCarouselInterval = Math.max(
   }
 
 </style>
-
